@@ -1,13 +1,87 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import 'antd/dist/antd.css';
+
+.root {
+  height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.header {
+  background-color: #48484a;
+}
+.search {
+  width: 25%;
+}
+.search button {
+  background-color: #e96e50;
+  border-color: #e96e50;
+}
+.search button:hover {
+  background-color: #ed8b73;
+  border-color: #ed8b73;
+}
+.search input:focus {
+  border-color: #e96e50 !important;
+}
+
+.content {
+  background-color: white;
+}
+.loading {
+  height: 100%;
+}
+.currentWeather {
+  min-height: 50%;
+}
+.location {
+  color: #e96e50 !important;
+  text-align: center;
+  margin-bottom: 0 !important;
+}
+.titleImage {
+  width: 100px;
+  height: 100px;
+}
+.forecast {
+  margin-top: 10px;
+}
+.forecastCards {
+  margin: 5px 0;
+}
+.forecastSelect {
+  width: 150px;
+}
+.ant-card-body {
+  padding: 0 5px !important;
+}
+.ant-card-head {
+  display: flex;
+  justify-content: center;
+  padding: 0 !important;
+}
+.cardImageDiv {
+  display: flex;
+  justify-content: center;
+}
+.cardImage {
+  width: 50px;
+  height: 50px;
+}
+.forecastCard {
+  width: 110px;
+}
+.cardWeather {
+  display: flex;
+  justify-content: center;
+}
+.ant-descriptions-item-content {
+  justify-content: end;
+}
+.selectedCity {
+  border: 1px solid black;
+}
+.selectedGraph {
+  border: 1px solid black;
+}
+
+.footer {
+  background-color: #f2f2f2;
 }

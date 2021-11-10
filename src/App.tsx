@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useEffect, useState } from 'react';
+import { Layout } from 'antd';
+import { Footer } from './components/Footer';
+import { fetchByLocation } from './api/selectLocation';
+import { LocationCoord } from './types/locationDataType';
+import { Main } from './components/Main';
+import { Head } from './components/Head';
 
-function App() {
+export const App: FC = () => {
+  const [locationCoord, setLocationCoord] = useState<LocationCoord>({
+    lat: 0,
+    lon: 0,
+  });
+  const [locationName, setLocationName] = useState<string>('');
+
+  const [error, setError] = useState<string>();
+
+  const getLocationCoord = async () => {
+    const response = await fetchByLocation(locationName);
+    const data = await response.json();
+
+    if (data.message) {
+      return setError(data.message);
+    }
+    setError('');
+
+    setLocationCoord({
+      lat: data.city.coord.lat,
+      lon: data.city.coord.lon,
+    });
+  };
+
+  useEffect(() => {
+    window.navigator.geolocation.getCurrentPosition((position) =>
+      setLocationCoord({
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    if (locationName) {
+      getLocationCoord();
+    }
+  }, [locationName]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className="root">
+      <Head setLocationName={setLocationName} />
+      <Main
+        locationCoord={locationCoord}
+        locationName={locationName}
+        error={error}
+        setError={setError}
+      />
+      <Footer />
+    </Layout>
   );
-}
+};
 
 export default App;
